@@ -1,35 +1,14 @@
-# WRO-2024-SAPIENS
-WRO-2024-SAPIENS
+# WRO-future engineers 
+scrapy
 
 ## Engineering Materials
 All the materials used to create our robot
-- 1 Arduino Nano Every (https://docs.arduino.cc/hardware/nano-every/)
-- 1 TB6612 H-Bridge (HW-166)
-- 4 Ultrasonic Sensors (1 at the front, 1 at the back, the other two right and left)
-- 1 Small on/off switch
-- 1 PushButton
-- 1 Blue LEDS (1 for power, one for indication of the code)
-- 2 resistors (360 Ohms) for code Indicator LEDS
-- 25 Proto Wires
-- 34 Rigid Wires (Hand cut)
-- 2 Big Rigid Wires
-- 2 Ceramic Capacitor 104
-- 1 Capacitor 100 25-50V
-- 1 Voltage Regulator L7805
-- 1 Mini Power Supply HW-131 (Also works as voltage regulator) 5V and 3.3V2
-- 1 Porta Fusibles
-- 12V Battery 3S (18650 + BMS + 2 cable outings) (more about this can be seen in the electromehcanical components)
-- 1 Chasis (DC Auto) This includes:
-    - 4 Wheels
-    - 1 Motor (more about this explained in other sections)
-    - 1 Servo
-- Multiple 3d pieces whih can be found in the following directory
-[3d_files](models/3D_files/)
+- one lego ev3 brick
+- one lego ev3 large motor
+- one lego nxt large motor
+- lego ev3 battery
+- spare lego technic pieces
 
-## Building instructions
-- Chasis (Motors and base): https://mp.weixin.qq.com/s/dOADMsXeo7Lxebgg0yiY5Q
-- Electronics (Circuit and battery): [The circuit diagram can be found in the schemes directory](schemes/)
-- Code (For the arduino): [The source code can be found in the src directory](src/)
 
 ## Contents
 - [Models](models/) This directory contains all used 3d models
@@ -38,16 +17,17 @@ All the materials used to create our robot
 - [Schemes](schemes/) All wiring diagrams can be found in this directory
 - [Source Code](src/) This directory contains all the code used in this proyect
 - [Team Photos](t-photos/) The official Team photos can be found here
-- [Performance Videos](p-videos/) The robot Performance videos for each challenge
+- [Performance Videos](p-videos/) The robot Performance videos 
 - [Vehicle Pictures](v-photos/) All vehicle photos can be found in this directory, including some individual components
-This is just a test to see if content linking works
+
 
 ## Introduction
 Brief intro on our solution
 
-For our robotics competition, we developed an innovative navigation solution that leverages Arduino's vision capabilities to detect and respond to color signals. By utilizing a camera module, our robot can identify green and red colors, which dictate its turning directions—left for green and right for red. This color-based navigation system is complemented by a comprehensive obstacle detection and avoidance mechanism.
+As for now we just got a new robot and had to change our strategy, with this new ev3 robot we are keeping it as simple as possible.
 
-To enhance our robot's awareness and maneuverability, we integrated four ultrasonic sensors—three positioned at the front and one at the back. These sensors provide real-time distance measurements, enabling the robot to detect and avoid obstacles from multiple directions. Our approach demonstrates the synergy of vision technology, ultrasonic sensing, and precise control algorithms, resulting in a responsive and reliable robotic solution.
+for the first challenge we have programed the robot so it 
+
 
 ## Mobility 
 Our robot uses an Ackerman steering system, with this steering system we can make our robot do the turns that have to be done during the 3 rounds. But because of the shape of our chassis and the type of steering system we use, our robot can only turn up to a certain point. In the case of turning to the right, it can only turn 30 degrees and in the left one it can only turn 10 degrees.
