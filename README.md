@@ -30,111 +30,26 @@ For the first round, the robot will start its tasks with a basic, yet effective,
 
 
 
+## strategy
+For the first challenge, we have programmed the robot to move the steering completely to the left and then back the same number of degrees to the right so that it is perfectly aligned. This initial movement is crucial as it ensures that the robot starts from a neutral, centered position, allowing for more accurate and reliable navigation. Then, the robot is programmed to adjust the steering to an exact position using degrees, giving us fine control over its movement. This precision will allow us to earn the maximum number of points, even without having the resources to implement a more complete and complex programming due to the lack of time and connector cables. However, this solution is only temporary, and we are already working on another method that could provide even better results in the future. We also considered counting the rotations to obtain the three points achievable after completing the three laps in the initial square. However, this has proven not to be very viable due to small changes such as the robot’s positioning at the start or the condition of the track, which varies from competition to competition. The imperfections in the track can affect the robot’s performance, making it less reliable. Additionally, the battery level affects the number of necessary rotations, so we have discarded this option, at least for this competition. The variability introduced by these factors makes the rotation-based strategy less predictable and, therefore, less desirable for a competition setting where consistency is key.
 
-## Mobility 
-Our robot uses an Ackerman steering system, with this steering system we can make our robot do the turns that have to be done during the 3 rounds. But because of the shape of our chassis and the type of steering system we use, our robot can only turn up to a certain point. In the case of turning to the right, it can only turn 30 degrees and in the left one it can only turn 10 degrees.
+For the second round, we currently do not have a clear solution due to the lack of connector cables, which limits our ability to fully implement our preferred strategies. However, we do have a strategy in mind that could work well under these constraints. We would use two color sensors at angles of 60 degrees and 120 degrees, respectively, and two ultrasonic sensors on each side of the robot. The robot would advance by checking the distance between the walls, staying in the center of the track by maintaining a distance of at least 40 cm from each wall. This method allows the robot to navigate effectively without veering too close to the edges, which could cause issues with obstacle detection or avoidance. With a low speed and the two color sensors, it should be able to detect obstacles, avoid them on the respective side, and return to the initial position. Another solution for this challenge, or a variation of the previous one, would be to use a gyroscope sensor so that the robot can follow a straight line along a pre-established path and return to it even after deviating to avoid an obstacle. The gyroscope could provide the stability needed to ensure that the robot remains on course, even when external factors like obstacles or uneven surfaces come into play.
 
-Here you can see the shape of the chassis of our robot as a guide:
-- [Chassis of our robot](v-photos/) 
 
-Some of the problems we faced with the steering system is that we had to come up with a way for the robot to make the turns neither too tight nor too wide, to fix this we use ultrasonic sensors on the front, right and left side of the front of the robot that are detecting how far it started and how many degrees it has to move forward while it is turning. For example during the open challenge round we made the robot turn when one of the ultrasonic sensors on one of the sides stops detecting or detects a greater distance than it had detected during the straight line, the sensor that performs this action depends on whether it is the one on the right or left, when it is the one on the right is when the round is being performed clockwise and when it is the one on the left when it is counterclockwise. 
+## mobility
+Our robot uses two motors, one NXT motor for the steering. This motor is coupled to a bar along with a gear that acts as an axle to operate the steering gear. We chose this mechanism because it allows a wide range of motion, which is necessary to execute our strategy, as it is more precise and allows the steering to be positioned exactly at the angle needed to complete the three laps. The precision offered by this setup is critical for ensuring that the robot can navigate the course accurately, especially when tight turns or complex maneuvers are required.
 
-Meanwhile the servo motor is at 80 degrees the robot will turn to the left, so if it is at 120 degrees the robot will turn to the right, but you think that when the servo motor is at 100 degrees it will be in a position in which the wheels will be straight, this thought is incorrect because when the servo is at 100 degrees it will be slightly turning to the right, then we ask two questions, the first one is: So how many degrees should be the servo motor so that the robot wheels are straight? To answer this question, the degrees that the servo must be at for the wheels to be straight is 90 degrees, and this is where the second question comes in, which is: Why when the servo is at 90 degrees will the wheels be straight, if when the servo was at 80 degrees the robot would turn to the left and when the servo was at 120 degrees the robot would turn to the right, if the degrees that are in between these two numbers of degrees are 100 degrees? Well to answer this question, the 90 degree position is considered "straight" or "neutral" in many servo motor systems because it is the preconfigured standard in many servos to indicate that there is no deviation to the left or right and because of how we have the servo positioned with the chassis we are using and the Ackerman steering system our steering only goes from 80 to 120 degrees.
+In the rear part of the robot, there is an EV3 motor that is used for forward movement. It is positioned vertically to occupy the least space possible, making the robot compact and rigid. This compact design not only saves space but also contributes to the overall stability of the robot, reducing the likelihood of tipping or other stability-related issues during operation. The vertical positioning of the motor also helps in maintaining a low center of gravity, which is beneficial for handling the robot on uneven surfaces or during sudden changes in direction.
 
-For the speed management part, our robot is generally going to go at 120 speed on straight lines, while it is rotating it will go at 100 of speed.
-
-As for the equations we use 2 formulas, between the 2 formulas we have the turning time, this establishes that the speed that we are using during the turn, that is 100 We are going to divide it by 100 and the result we are going to multiply it by 1200 and this would give us the time during which we are going to rotate in milliseconds; the second formula is about the angle of rotation in this we are going to divide the speed by the result of the previous formula, then this result we are going to multiply it by 130 and the result that this formula gives us we are going to subtract it to another 130 and the result of this subtraction is going to give us the angle with which we are going to rotate. We use these formulas to make the turns between sections. 
-
-## Strategy
-Strategy Explanation
-Color Detection with Arduino:
-We integrated a Nicla vision with the arduino nano every to accurately detect colors. This system allows the robot to recognize green and red colors, which serve as signals to turn left or right, respectively. By using a camera module and appropriate color detection algorithms, the robot can continuously monitor its environment and respond in real time.
-
-Directional Decision Making:
-Upon detecting the color green, the robot is programmed to turn left. Conversely, when red is detected, the robot turns right. This color-based decision-making process ensures that the robot navigates efficiently and avoids obstacles or follows a designated path based on the predefined color signals.
-
-Border Detection and Turning:
-In addition to color detection, our robot is equipped with ultrasonic sensors to identify when and where it should turn. It uses an "umbral" which is a certain distance which if the robot pases, it will start to turn to a certain direction. That direction is decided by the other two ultrasonic sensors to the left and to the right.
-
-Implementation Details
-Code and Integration:
-Our code, available here, outlines the specific algorithms and logic used for color detection, decision-making, and obstacle avoidance. The integration of the vision system with Arduino's control mechanisms is crucial for the robot's functionality.
-
-Color Detection Algorithm:
-The algorithm processes the camera feed to identify the presence of green or red. This involves filtering the image to isolate these colors and then using thresholding techniques to determine the direction.
-
-Obstacle Avoidance Routine:
-When the sensors detect an obstacle, the robot executes a series of steps to navigate around it. This includes stopping, scanning the surroundings, calculating an alternate path, and resuming its movement while continuing to rely on the color signals for direction.
-
-Conclusion
-Our solution leverages the capabilities of Arduino's vision system to create a responsive and efficient navigation strategy. By combining color detection with obstacle avoidance, our robot can intelligently navigate its environment, making it well-suited for the challenges of the competition.
-
-This approach not only demonstrates the effectiveness of integrating vision with control systems but also highlights the importance of robust algorithms in achieving reliable performance in dynamic conditions.
 
 ## Code Explanation
-In order to enact our strategy and enable our robot to complete each phase, our team created multiple programs that will be summarized and explained in the following text. For reference look at the [src directory](src).
+First, it is important to clarify that this robot is programmed using the default EV3 software, EV3-G, a block-based programming environment. This environment is particularly user-friendly, allowing us to quickly and efficiently develop the necessary code for our robot. It can also be programmed with Python, Scratch, and Java (using LeJOS), offering greater flexibility depending on the user’s level of expertise and the specific requirements of the project. However, given the limited time, we opted to use EV3-G as we considered it the simplest and fastest option for our needs. The block-based nature of EV3-G made it easier to implement our strategies without needing extensive coding knowledge or experience, which was essential given our time constraints.
 
-The src directory is divided into 3 sections, Arduino Code, Nicla Code, and Other. This text will focus on the Arduino code as the Nicla is currently not being used. [The Arduino Code Directory](src/Arduino Code/) is divided in 2 sections, phase 1 and phase 2. At the time of writing, only phase 1 has been completed, that being said, our proyect is still in development, and in the near future it will be added to the github. 
+The code in this project is fairly simple but effective. We start with moving motor A 200º at a power of 10; this is the first part of the calibration process. By reaching the maximum range of steering movement, this gives us an equal starting point for all programming. This step is crucial because it standardizes the robot’s initial position, ensuring that all subsequent movements are consistent and predictable. Then, it will turn 205º to the right with a power of 10. By making this movement from the maximum steering point, it will be in a straight position, ready to move to any point needed in the different quadrants. This alignment process ensures that the robot is always in the correct orientation before it begins any task, reducing the risk of errors. Then, in a loop, the rear motor will start moving with a power of 60. We decided on this speed because it allows the steering to be more precise and avoids accidents while moving at a good pace, preventing excessively high times. The chosen speed strikes a balance between accuracy and efficiency, allowing the robot to complete its tasks within the allotted time while minimizing the risk of collisions or other mishaps.
 
-[Phase 1](src/Arduino_Code/Phase_1):
-Phase 1 contains multiple programs to show how our code has changed, the main code is called newcodephase1
-
-- The program starts by defining all variables and importing all libraries, this include, all pins (except the two Led indicators), the max angle for the servo, and some other useful variables.
-
-- Next is the PD, or Proportional Derivative. This PD is used later in "Accelerar Recto" to help mantain the robot in a straight line, there are multiple comments in the code explaining the PD, so the specific details will not be mentioned in this text. 
-
-- After this comes the set up function, which as is said in the name, sets up the robot. It defines all pin modes and the servo. 
-
-- Then comes the actual main part of the code, which can be found in the loop function. The loop function starts with a while loop that will repeat until a button is pressed. Pin #5 is in mode Input, which means that it recieves current. When the button is pressed, current from the battery is passed into the pin which causes the while loop to end. After the while loop ends, the 3 ultrasonic sensors measure the current distance, and each value is defined in a variable. This is done by calling the "medir_distancia" function which returns a float value.
-  
-- The medir distancia function can be found in line 241, it uses "cases" to determine which ultrasonic has to be activated. Once that is defined, the ultrasonic sends the sound waves and a duration value is returned, this value is processed by using the formula ((duration * 0.034 / 2)*0.95), which returns a distance reading in centimeters.
-
-- Returning to the loop function, next up, a for loop starts. This for loop repeats 70 times, which is an absurd number of times right? Well thats the amount of times the function we use has to repeat in order to complete the 3 laps. Unfortunately, this is due to a weird error in our code that makes it so sometimes the turn function ends prematurely. 70 loops garantues that the robot completes the 3 laps, but in exchange, sometimes it does 3.5 or 4 laps, which means we can't consistently stop in the initial spot (this subtracts 3 points from our phase 1 score)
-
-- Getting back to the functions used, first_turn is the function used for all turns, it was supposed to be only a function for the first turn, but it was so consistent we just used it repeatedly. First_turn is made up of 2 main parts, moving the robot forwards until it meets the umbral (or the left/right sensor detect more than 150 cms which indicated a turn), and then the actual turning.
-- When the robot goes forward our pd constantly corrects the robot's position, we also have save crash function which makes it so if the robot is about to crash, it goes backwards and turns, preventing it from ending the round. This repeats until, how we mentioned earlier, the ultrasonic sensors forwards and back match the umbral or the right/left sensors detect more than 150 cms. It should probably be noted that the left anf right sensors almost never end the loop, and it is almost always the umbral.
-- After the forwards loop ends, the robot detects right and left to decide what direction it will turn, the function left_turn and right_turn take in 2 parameters. Angle and time, angle being the angle at which it will turn, and time being the amount of time it will turn. Yet, if you see the actual code, you will notice that we set time at 0, so that means it shouldn't be turning right? Well, we found out that turning bya time was very inconsistent since gradual errors make the robot eventually crash, for this reason we are now using the left_end_turn function, which is incredibly consistent for 2 main reasons
-- 1. It turns gradually from the specified angle (normally 60) to 84, increasing 1 degree every 112 miliseconds
-  2. It turns, not by time, but until the ultrasonic sensors detect from a range of 100 to 30. This is the main reason why the robot is so consistent when turning compared to the previous code. Before, some very small errors could lead to crashes by the second lap, but with this code, we decrease the effect of those small errors substantially, since every turn will always be mostly straight, no matter at what angle it starts.
-
- - When the for loop ends, the breaking function (whichs stops the robot) sets in and the robot stops.
-
-[Phase 2](src/):
-Phase 2 consists of two different programs, one for the arduino nano every, and one for the nicla vision. Check each of their respective directories to see the code. Since the code is not finished and is pretty minimal right now, only the explanation for the integration can be fully developed
-- The integration uses the wire library to connect the Nicla Vision and Nano every. It connects them bya I2C, or SCl and SDA connection. In both programs, the baudrate is set to 100000 and the address is set to the number 8. In the code it can be seen how the Nicla Vision is set to be the master, this means that the nicla vision will send information to the nano every and the nano every will respond to that information. If the nano every was the master, it would ask the nicla vision for information and it would use that information accordingly. 
-
-- Currently, the Nicla Vision sends 0 if it detects green, and 1 if it detects red, when it send information, the nano every starts the recieveEvent function which processes the information and reacts accordingly
 
 ## Electromechanical Components
-A lithium battery pack is being used in 3S1P configuration where 2 batteries are in parallel and then this pack is in series with the 2 batteries, to give a total of 12.6 Volts with 1900mAh capacity, together with the help of a BMS to manage the power input and output.
-From this battery pack we are getting two cables, of which one has a male terminal and the other has a female terminal.
+Power Source
+In this robot, we are using the EV3 rechargeable battery. It is a 7.4V 2050 mAh lithium-ion (Li-Ion) unit, designed to provide longer duration and convenience compared to traditional AA batteries. This type of battery allows the EV3 brick to operate for longer periods, which is especially useful in this competition where consistent performance is crucial. The battery recharges directly inside the brick using a power adapter, eliminating the need to remove the battery to recharge it. This feature not only saves us time and effort but also ensures that the robot remains fully assembled and ready to go at all times. By not having to disassemble the robot to change batteries, we reduce the chances of introducing assembly errors or damaging components during reassembly. Additionally, the EV3 brick includes a charge level indicator, making it easier to manage power and ensuring that the robot is always ready to operate. This indicator is particularly useful during competitions, where knowing the battery level at a glance can be critical for planning and executing strategies. Overall, the EV3 rechargeable battery offers significant advantages in terms of both convenience and performance, making it an ideal choice for our robot in this competition setting.
 
-4 ultrasonic arduino sensors HC-SRO4 are being used. This sensor provides 2cm to 400cm of non-contact measurement functionality with a ranging accuracy that can reach up to 3mm. Each HC-SR04 module includes an ultrasonic transmitter, a receiver and a control circuit. There are only four pins that you need to worry about on the HC-SR04: VCC (Power), Trig (Trigger), Echo (Receive), and GND (Ground).
-
-We used a Nicla Vision to detect the color of the obstacles, we made an algorithm to give the robot the ability to differentiate between green and red. 
-We connected the Nicla Vision with the Arduino Nano Every through the SCL and SDA signals. 
-When the Nicla Vision passes the information to the arduino about the color of the obstacle the arduino processes it and decides to turn left or right depending on whether the obstacle is red or green. 
-
-Here is how the components are connected:
-- [Wiring Diagrams](schemes/)
-
-Unfortunately the Nicla Vision we used could not be found or obtained in the application we used for this reason we could not include it in the wiring diagram. But here is how the Nicla Vision is connected to the Arduino Nano Every:
--SDA from the Nicla Vision to pin D18 (SDA) of the Nano Every.
--SCL from the Nicla Vision to the D19 pin (SCL) of the Nano Every
--GND from the Nicla Vision to GND of the Nano Every
--VIN from the Nicla Vision to the 5V+ pin of the Nano Every
-
-Here are some pictures of the batteries and sensors that we use: 
-- [Batteries](v-photos/Electromechanical-Components/)
-
-## Power Management
-The battery power is separated in two parts. 
-One part feeds the Arduino Nano Every and the Ultrasonic Sensors with 5 volts. This part make use of the Mini Power Supply HW-131 to regulate the voltage. 
-The other part feeds the H-Bride TB6612 with 12 volts. 
-Of course, all grounds are connected, but the 12 volts are only supplied in one positive line, this is the line that feeds the H-Bridge. 
-Yet, this line connects to another positive line, but with the L7805 voltage regulator. This voltage regulator ensures that the servo and the power LED get 5 volts. Finally, the servo uses a capacitor to store energy in the case that the current demand is too high.
-
-""Note: We use a porta fusible for safety of a short circuit in the 12 volts outing. It is highly recomended that this is used as this lithium battery could lead to a very dangerous safety hazard if not managed carefully. 
-
-- [You can see the vehicle picture for reference](v-photos/)
 
