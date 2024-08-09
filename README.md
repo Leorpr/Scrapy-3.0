@@ -24,9 +24,11 @@ All the materials used to create our robot
 ## Introduction
 Brief intro on our solution
 
-As for now we just got a new robot and had to change our strategy, with this new ev3 robot we are keeping it as simple as possible.
+As for now, we just got a new robot and had to change our strategy. With this new EV3 robot, we are keeping it as simple as possible, ensuring that the complexity of the tasks does not overwhelm the system or our time constraints. This approach helps us maintain focus on achieving consistent results, even with limited resources and time.
 
-for the first challenge we have programed the robot so it 
+For the first round, the robot will start its tasks with a basic, yet effective, strategy designed to maximize our chances of success.
+
+
 
 
 ## Mobility 
